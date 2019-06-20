@@ -2,6 +2,8 @@
 
 . /kb/deployment/user-env.sh
 
+export PERL5LIB=$PERL5LIB:${CCT_HOME}/lib/bioperl-1.2.3:${CCT_HOME}/lib/perl_modules
+
 python ./scripts/prepare_deploy_cfg.py ./deploy.cfg ./work/config.properties
 
 if [ -f ./work/token ] ; then

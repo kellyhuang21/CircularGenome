@@ -63,17 +63,12 @@ class CGView:
         if 'input_file' not in params:
             raise ValueError('Parameter input_file is not set in input arguments')
         input_file = params['input_file']
-        project_dir = os.path.join(self.shared_folder, 'project')
-        # subprocess.call(["export", 'PERL5LIB="${CCT_HOME}"/lib/bioperl-1.2.3:"${CCT_HOME}"/lib/perl_modules:"$PERL5LIB"'])
 
-        subprocess.call(["/opt/cgview_comparison_tool/cgview_comparison_tool.pl", "-p", ""], shell=True)
-        proj_output = subprocess.check_output(["ls", "/opt"], shell=True)
-        print(proj_output)
         # call CGView
-        # p = subprocess.Popen(call_, cwd = self.scratch, \
-        #                      stdout = subprocess.PIPE, \
-        #                      stderr = subprocess, \
-        #                      shell = False)
+        p = subprocess.Popen(call_, cwd = self.scratch, \
+                             stdout = subprocess.PIPE, \
+                             stderr = subprocess, \
+                             shell = False)
         # Download input data as Fasta
         print('Downloading Assembly data as a Fasta file.')
         genomeUtil = GenomeFileUtil(self.callback_url)
@@ -93,7 +88,6 @@ class CGView:
         output = {
             'report_name': report_info['name'],
             'report_ref': report_info['ref'],
-            'test_path': report_info['']
         }
         #END run_CGView
 

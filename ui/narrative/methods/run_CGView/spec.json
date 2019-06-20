@@ -25,8 +25,8 @@
     "behavior": {
         "service-mapping": {
             "url": "",
-            "name": "kellyhuangCGView",
-            "method": "run_kellyhuangCGView",
+            "name": "CGView",
+            "method": "run_CGView",
             "input_mapping": [
                 {
                     "narrative_system_variable": "workspace",

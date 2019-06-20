@@ -1,11 +1,9 @@
 # -*- coding: utf-8 -*-
 #BEGIN_HEADER
+import logging
 import os
-import subprocess
 
 from installed_clients.KBaseReportClient import KBaseReport
-from installed_clients.GenomeFileUtilClient import GenomeFileUtil
-
 #END_HEADER
 
 
@@ -25,8 +23,8 @@ class CGView:
     # the latter method is running.
     ######################################### noqa
     VERSION = "0.0.1"
-    GIT_URL = "https://github.com/kellyhuang21/CircularGenome.git"
-    GIT_COMMIT_HASH = "0a231538a907e8aa9d0068d12e280a85bb5e09d6"
+    GIT_URL = ""
+    GIT_COMMIT_HASH = ""
 
     #BEGIN_CLASS_HEADER
     #END_CLASS_HEADER
@@ -53,39 +51,6 @@ class CGView:
         # ctx is the context object
         # return variables are: output
         #BEGIN run_CGView
-        print('Starting run_kellyhuangCGView function. Params=')
-        print(params)
-        # Validating workspace_name and input_file is present
-        print('Validating parameters.')
-        if 'workspace_name' not in params:
-            raise ValueError('Parameter workspace_name is not set in input arguments')
-        workspace_name = params['workspace_name']
-        if 'input_file' not in params:
-            raise ValueError('Parameter input_file is not set in input arguments')
-        input_file = params['input_file']
-        project_dir = os.path.join(self.shared_folder, 'project')
-        # subprocess.call(["export", 'PERL5LIB="${CCT_HOME}"/lib/bioperl-1.2.3:"${CCT_HOME}"/lib/perl_modules:"$PERL5LIB"'])
-
-        subprocess.call(["/opt/cgview_comparison_tool/cgview_comparison_tool.pl", "-p", ""], shell=True)
-        proj_output = subprocess.check_output(["ls", "/opt"], shell=True)
-        print(proj_output)
-        # call CGView
-        # p = subprocess.Popen(call_, cwd = self.scratch, \
-        #                      stdout = subprocess.PIPE, \
-        #                      stderr = subprocess, \
-        #                      shell = False)
-        # Download input data as Fasta
-        print('Downloading Assembly data as a Fasta file.')
-        genomeUtil = GenomeFileUtil(self.callback_url)
-        genome = genomeUtil.genbank_to_genome({'ref': input_file})
-
-        # Save assembly back to system
-        print('Uploading filtered Assembly data.')
-
-        # new_assembly = assemblyUtil.save_assembly_from_fasta({'file': {'path': filtered_fasta_file},
-        #                                                   'workspace_name': workspace_name,
-        #                                                   'assembly_name': genome['assembly_name']
-        #                                                   })
         report = KBaseReport(self.callback_url)
         report_info = report.create({'report': {'objects_created':[],
                                                 'text_message': params['parameter_1']},
@@ -93,7 +58,6 @@ class CGView:
         output = {
             'report_name': report_info['name'],
             'report_ref': report_info['ref'],
-            'test_path': report_info['']
         }
         #END run_CGView
 
