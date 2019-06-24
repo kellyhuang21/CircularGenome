@@ -85,11 +85,13 @@ class CGView:
         proc = subprocess.Popen(["cgview_comparison_tool.pl", "-p", "/opt/cgview_comparison_tool/project"], stdout=subprocess.PIPE)
         # for line in proc.stdout:
         #     print(line)
-        # proc.wait()
+        proc.wait()
         subprocess.call(["cgview_comparison_tool.pl",  "-p", " project"], shell=True)
         print("===== /opt/cgview_comparison_tool/project/maps =====", os.listdir("/opt/cgview_comparison_tool/project/maps"))
 
         # Retrieve map PNG from project_folder/maps
+        proj_path = subprocess.check_output("pwd")
+        print("=====", proj_path)
         png_file_path = "/opt/cgview_comparison_tool/project/maps/medium.png"
         png_dict = {'path':png_file_path, 'name': 'First Image'}
         html_file_path = '/opt/cgview_comparison_tool/project/maps/medium.html'
