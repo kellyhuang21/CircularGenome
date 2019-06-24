@@ -69,18 +69,15 @@ class CGView:
         # Set up CCT project_folder
         subprocess.call("cd /opt/cgview_comparison_tool && ./update_cogs.sh && cgview_comparison_tool.pl -p project", shell=True)
 
-        # Turn genome object to Genbank file
+        # Turn genome object to Genbank file and change .gbff to .gbk
         gfu = GenomeFileUtil(self.callback_url)
         gbk = gfu.genome_to_genbank({'genome_ref':input_file})
         gbk_file = gbk["genbank_file"]["file_path"]
         gbk_name = ntpath.basename(gbk_file)
         subprocess.call(["cp", gbk_file, "/opt/cgview_comparison_tool/project/reference_genome"])
         gbk_path = "/opt/cgview_comparison_tool/project/reference_genome/" + gbk_name
-
         base = os.path.splitext(gbk_path)[0]
         os.rename(gbk_path, base + ".gbk")
-        # print("===/kb/module/work/tmp", os.listdir("kb/module/work/tmp"), "===path", gbk_path)
-        # subprocess.call(["cp", gbk_path, "/opt/cgview_comparison_tool/project/reference_genome"])
 
         # Add Genbank file to project_folder/reference_genome
         print("===== /opt/cgview_comparison_tool/project/reference_genome =====", os.listdir("/opt/cgview_comparison_tool/project/reference_genome"))
