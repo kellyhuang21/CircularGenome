@@ -36,7 +36,7 @@
                     "target_property": "workspace_id"
                 },{
                     "input_parameter": "input_file",
-                    "target_property": "input_file"],
+                    "target_property": "input_file",
                     "target_type_transform":"ref"
                 }
             ],
