@@ -88,7 +88,7 @@ class CGView:
         # Generate map from Genbank file
         # subprocess.call("cgview_comparison_tool.pl -p project", shell=True)
         os.chdir("/opt/cgview_comparison_tool")
-        proc = subprocess.Popen(["cgview_comparison_tool.pl", "-p", "/opt/cgview_comparison_tool/project", "--map_size", "small"], stdout=subprocess.PIPE)
+        proc = subprocess.Popen(["cgview_comparison_tool.pl", "-p", "/opt/cgview_comparison_tool/project", "--map-size", "small"], stdout=subprocess.PIPE)
         # for line in proc.stdout:
         #     print(line)
         proc.wait()

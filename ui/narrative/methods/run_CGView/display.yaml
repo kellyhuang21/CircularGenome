@@ -26,7 +26,7 @@ suggestions:
 parameters :
     input_file :
         ui-name : |
-            First parameter
+            Genome
         short-hint : |
             input file
     output_img:
