@@ -85,8 +85,6 @@ class CGView:
         subprocess.call(["mv", from_path, to_path])
 
         # Add Genbank file to project_folder/reference_genome
-        print("===== /opt/cgview_comparison_tool/project/reference_genome =====", os.listdir("/opt/cgview_comparison_tool/project/reference_genome"))
-
         # Generate map from Genbank file
         # subprocess.call("cgview_comparison_tool.pl -p project", shell=True)
         os.chdir("/opt/cgview_comparison_tool")
