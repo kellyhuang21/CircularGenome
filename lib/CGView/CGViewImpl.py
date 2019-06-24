@@ -76,7 +76,6 @@ class CGView:
         gbk_file = gbk["genbank_file"]["file_path"]
         subprocess.call(["cp", gbk_file, "/opt/cgview_comparison_tool/project/reference_genome"])
         base = ntpath.basename(gbk_file).rsplit(".", 1)[0]
-        print("====base", base)
         name_gbff =  base + ".gbff"
         name_gbk = base + ".gbk"
         from_path = "/opt/cgview_comparison_tool/project/reference_genome/" + name_gbff
@@ -100,23 +99,18 @@ class CGView:
 
         # Retrieve map PNG from project_folder/maps
         subprocess.call(["cp", "/opt/cgview_comparison_tool/project/maps/medium.png", self.shared_folder])
-        png_dir = os.path.join(self.shared_folder, 'medium.png')
+        subprocess.call(["cp", "/opt/cgview_comparison_tool/project/maps/medium.html", self.shared_folder])
 
-        print("=====", png_dir)
-        png_file_path = "/opt/cgview_comparison_tool/project/maps/medium.png"
+        png_dir = os.path.join(self.shared_folder, 'medium.png')
+        html_dir = os.path.join(self.shared_folder, 'medium.html')
+
         png_dict = {'path':png_dir, 'name': 'Circular_Genome_Map_PNG'}
-        html_file_path = '/opt/cgview_comparison_tool/project/maps/medium.html'
-        # html_dict = {'path': html_file_path,'name':'First Image'}
+        html_dict = {'path': html_dir,'name':'Circular Genome Map'}
         report_client = KBaseReport(self.callback_url)
         report = report_client.create_extended_report({
-            # 'html_links':[html_dict],
+            'html_links':[html_dict],
             'file_links':[png_dict],
             'workspace_name': params['workspace_name'],
-            'objects_created': [{
-                'ref':input_file,
-                'description':"Graphical map of circular genome showing sequence composition characteristics using CGView"
-            }]
-
         })
         # subprocess.check_output(["cd", "/opt/cgview_comparison_tool"], shell=True)
         # proj_output = subprocess.check_output(["pwd"], shell=True)
