@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 #BEGIN_HEADER
 import os
+import ntpath
 import subprocess
 
 from installed_clients.KBaseReportClient import KBaseReport
@@ -72,8 +73,14 @@ class CGView:
         gfu = GenomeFileUtil(self.callback_url)
         gbk = gfu.genome_to_genbank({'genome_ref':input_file})
         gbk_file = gbk["genbank_file"]["file_path"]
+        gbk_name = ntpath.basename(gbk_file)
         subprocess.call(["cp", gbk_file, "/opt/cgview_comparison_tool/project/reference_genome"])
-        subprocess.call(["mv", "/opt/cgview_comparison_tool/project/reference_genome/KBase_derived_QGKT01000001.1.gb_genome.gbff", "/opt/cgview_comparison_tool/project/reference_genome/KBase_derived_QGKT01000001.1.gb_genome.gbk"])
+        gbk_path = "/opt/cgview_comparison_tool/project/reference_genome/" + gbk_name
+
+        base = os.path.splitext(gbk_path)[0]
+        os.rename(gbk_path, base + ".gbk")
+        # print("===/kb/module/work/tmp", os.listdir("kb/module/work/tmp"), "===path", gbk_path)
+        # subprocess.call(["cp", gbk_path, "/opt/cgview_comparison_tool/project/reference_genome"])
 
         # Add Genbank file to project_folder/reference_genome
         print("===== /opt/cgview_comparison_tool/project/reference_genome =====", os.listdir("/opt/cgview_comparison_tool/project/reference_genome"))
