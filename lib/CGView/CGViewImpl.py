@@ -106,10 +106,12 @@ class CGView:
         subprocess.call(["cp", "/opt/cgview_comparison_tool/project/maps/medium.html", self.shared_folder])
         print("/opt/cgview_comparison_tool/project/maps/", os.listdir("/opt/cgview_comparison_tool/project/maps/"))
         png_dir = os.path.join(self.shared_folder, 'medium.png')
-        html_dir = os.path.join(self.shared_folder, 'medium.html')
+        html_file = os.path.join(self.shared_folder, 'medium.html')
+        with open(html_file, 'w') as html_handle:
+            html_handle.write('<img src="/opt/cgview_comparison_tool/project/maps/medium.png" height="50%"></img>')
 
         png_dict = {'path':png_dir, 'name': 'Circular_Genome_Map_PNG'}
-        html_dict = {'path': png_dir,'name':'Circular Genome Map'}
+        html_dict = {'path': html_file,'name':'medium.html'}
         report_client = KBaseReport(self.callback_url)
         report = report_client.create_extended_report({
             'direct_html_link_index': 0,
@@ -117,6 +119,7 @@ class CGView:
             'file_links':[png_dict],
             'workspace_name': params['workspace_name'],
         })
+
         # subprocess.check_output(["cd", "/opt/cgview_comparison_tool"], shell=True)
         # proj_output = subprocess.check_output(["pwd"], shell=True)
         # print("=====cd /opt/cgview_comparison_tool=====", proj_output)
