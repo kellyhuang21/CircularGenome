@@ -29,9 +29,9 @@ RUN cd /opt && \
     # cpanm -v LWP::Protocol::https && \
     cpanm -v Tie::IxHash && \
     apt-get -y install emboss && \
-    curl ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/ncbi-blast-2.9.0+-x64-linux.tar.gz > ncbi-blast-2.9.0+-x64-linux.tar.gz && \
-    tar xfz ncbi-blast-2.9.0+-x64-linux.tar.gz && \
-    rm ncbi-blast-2.9.0+-x64-linux.tar.gz && \
+    curl http://mirrors.vbi.vt.edu/mirrors/ftp.ncbi.nih.gov/blast/executables/legacy.NOTSUPPORTED/2.2.26/blast-2.2.26-x64-linux.tar.gz > blast-legacy-2.2.26.tar.gz && \
+    tar xzvf blast-legacy-2.2.26.tar.gz && \
+    rm blast-legacy-2.2.26.tar.gz && \
     curl -O -J -L http://www.ualberta.ca/~stothard/downloads/cgview_comparison_tool.zip > cgview_comparison_tool.zip && \
     unzip cgview_comparison_tool.zip && \
     rm cgview_comparison_tool.zip
@@ -39,7 +39,7 @@ RUN cd /opt && \
     # export PERL5LIB="${CCT_HOME}"/lib/bioperl-1.2.3:"${CCT_HOME}"/lib/perl_modules:"$PERL5LIB"
 
 ENV CCT_HOME="/opt/cgview_comparison_tool"
-ENV PATH="$PATH":"${CCT_HOME}/scripts":/opt/ncbi-blast-2.9.0+/bin
+ENV PATH="$PATH":"${CCT_HOME}/scripts":/opt/blast-2.2.26/bin
 ENV PERL5LIB=${CCT_HOME}/lib/bioperl-1.2.3:${CCT_HOME}/lib/perl_modules:$PERL5LIB
 # -----------------------------------------
 

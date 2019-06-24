@@ -64,5 +64,4 @@ class CGViewTest(unittest.TestCase):
         # Check returned data with
         # self.assertEqual(ret[...], ...) or other unittest methods
         ret = self.serviceImpl.run_CGView(self.ctx, {'workspace_name': self.wsName,
-                                                             'input_file': '79/16/1'})
-        print(ret)
+                                                             'input_file': '29796/9/1'})

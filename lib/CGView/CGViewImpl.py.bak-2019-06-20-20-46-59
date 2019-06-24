@@ -26,7 +26,7 @@ class CGView:
     ######################################### noqa
     VERSION = "0.0.1"
     GIT_URL = "https://github.com/kellyhuang21/CircularGenome.git"
-    GIT_COMMIT_HASH = "a5c49b44f15f584ef4ab215c4962baa90923e901"
+    GIT_COMMIT_HASH = "0a231538a907e8aa9d0068d12e280a85bb5e09d6"
 
     #BEGIN_CLASS_HEADER
     #END_CLASS_HEADER
@@ -62,60 +62,39 @@ class CGView:
         workspace_name = params['workspace_name']
         if 'input_file' not in params:
             raise ValueError('Parameter input_file is not set in input arguments')
-
         input_file = params['input_file']
         project_dir = os.path.join(self.shared_folder, 'project')
+        # subprocess.call(["export", 'PERL5LIB="${CCT_HOME}"/lib/bioperl-1.2.3:"${CCT_HOME}"/lib/perl_modules:"$PERL5LIB"'])
 
-        # Set up CCT project_folder
-        subprocess.call("cd /opt/cgview_comparison_tool && ./update_cogs.sh && cgview_comparison_tool.pl -p project", shell=True)
+        # subprocess.call(["/opt/cgview_comparison_tool/cgview_comparison_tool.pl", "-p", ""], shell=True)
+        proj_output = subprocess.check_output(["pwd"])
+        print(proj_output)
+        proj_output = subprocess.check_output(["ls", "/opt"])
+        print(proj_output)
+        # call CGView
+        # p = subprocess.Popen(call_, cwd = self.scratch, \
+        #                      stdout = subprocess.PIPE, \
+        #                      stderr = subprocess, \
+        #                      shell = False)
+        # Download input data as Fasta
+        print('Downloading Assembly data as a Fasta file.')
+        # genomeUtil = GenomeFileUtil(self.callback_url)
+        # genome = genomeUtil.genome_to_genbank({'genome_ref': input_file})
 
-        # Turn genome object to Genbank file
-        gfu = GenomeFileUtil(self.callback_url)
-        gbk = gfu.genome_to_genbank({'genome_ref':input_file})
-        gbk_file = gbk["genbank_file"]["file_path"]
-        subprocess.call(["cp", gbk_file, "/opt/cgview_comparison_tool/project/reference_genome"])
-        subprocess.call(["mv", "/opt/cgview_comparison_tool/project/reference_genome/KBase_derived_QGKT01000001.1.gb_genome.gbff", "/opt/cgview_comparison_tool/project/reference_genome/KBase_derived_QGKT01000001.1.gb_genome.gbk"])
+        # Save assembly back to system
+        print('Uploading filtered Assembly data.')
 
-        # Add Genbank file to project_folder/reference_genome
-        print("===== /opt/cgview_comparison_tool/project/reference_genome =====", os.listdir("/opt/cgview_comparison_tool/project/reference_genome"))
-
-        # Generate map from Genbank file
-        # subprocess.call("cgview_comparison_tool.pl -p project", shell=True)
-        os.chdir("/opt/cgview_comparison_tool")
-        proc = subprocess.Popen(["cgview_comparison_tool.pl", "-p", "/opt/cgview_comparison_tool/project"], stdout=subprocess.PIPE)
-        # for line in proc.stdout:
-        #     print(line)
-        # proc.wait()
-        subprocess.call(["cgview_comparison_tool.pl",  "-p", " project"], shell=True)
-        print("===== /opt/cgview_comparison_tool/project/maps =====", os.listdir("/opt/cgview_comparison_tool/project/maps"))
-
-        # Retrieve map PNG from project_folder/maps
-        png_file_path = "/opt/cgview_comparison_tool/project/maps/medium.png"
-        png_dict = {'path':png_file_path, 'name': 'First Image'}
-        html_file_path = '/opt/cgview_comparison_tool/project/maps/medium.html'
-        # html_dict = {'path': html_file_path,'name':'First Image'}
-        report_client = KBaseReport(self.callback_url)
-        report = report_client.create_extended_report({
-            # 'html_links':[html_dict],
-            'file_links':[png_dict],
-            'workspace_name': params['workspace_name'],
-            'objects_created': [{
-                'ref':input_file,
-                'description':"Genbank file"
-            }]
-
-        })
-        # subprocess.check_output(["cd", "/opt/cgview_comparison_tool"], shell=True)
-        # proj_output = subprocess.check_output(["pwd"], shell=True)
-        # print("=====cd /opt/cgview_comparison_tool=====", proj_output)
-        #
-        # report = KBaseReport(self.callback_url)
-        # report_info = report.create({'report': {'objects_created':[],
-        #                                         'text_message': params['input_file']},
-        #                                         'workspace_name': params['workspace_name']})
+        # new_assembly = assemblyUtil.save_assembly_from_fasta({'file': {'path': filtered_fasta_file},
+        #                                                   'workspace_name': workspace_name,
+        #                                                   'assembly_name': genome['assembly_name']
+        #                                                   })
+        report = KBaseReport(self.callback_url)
+        report_info = report.create({'report': {'objects_created':[],
+                                                'text_message': params['input_file']},
+                                                'workspace_name': params['workspace_name']})
         output = {
-            'report_name': report['name'],
-            'report_ref': report['ref'],
+            'report_name': report_info['name'],
+            'report_ref': report_info['ref'],
         }
         #END run_CGView
 
