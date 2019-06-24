@@ -70,15 +70,12 @@ class CGView:
         # Set up CCT project_folder
         subprocess.call("cd /opt/cgview_comparison_tool && ./update_cogs.sh && cgview_comparison_tool.pl -p project", shell=True)
 
-        # Turn genome object to Genbank file and change .gbff to .gbk
+        # Turn genome object to Genbank file
         gfu = GenomeFileUtil(self.callback_url)
         gbk = gfu.genome_to_genbank({'genome_ref':input_file})
         gbk_file = gbk["genbank_file"]["file_path"]
-        gbk_name = ntpath.basename(gbk_file)
         subprocess.call(["cp", gbk_file, "/opt/cgview_comparison_tool/project/reference_genome"])
-        gbk_path = "/opt/cgview_comparison_tool/project/reference_genome/" + gbk_name
-        base = os.path.splitext(gbk_path)[0]
-        os.rename(gbk_path, base + ".gbk")
+        subprocess.call(["mv", "/opt/cgview_comparison_tool/project/reference_genome/KBase_derived_QGKT01000001.1.gb_genome.gbff", "/opt/cgview_comparison_tool/project/reference_genome/KBase_derived_QGKT01000001.1.gb_genome.gbk"])
 
         # Add Genbank file to project_folder/reference_genome
         print("===== /opt/cgview_comparison_tool/project/reference_genome =====", os.listdir("/opt/cgview_comparison_tool/project/reference_genome"))
@@ -94,16 +91,14 @@ class CGView:
         print("===== /opt/cgview_comparison_tool/project/maps =====", os.listdir("/opt/cgview_comparison_tool/project/maps"))
 
         # Retrieve map PNG from project_folder/maps
-        shutil.move("/opt/cgview_comparison_tool/project/maps/medium.png", self.shared_folder)
-        # subprocess.call(["cp", "/opt/cgview_comparison_tool/project/maps/medium.png", self.shared_folder])
+        subprocess.call(["cp", "/opt/cgview_comparison_tool/project/maps/medium.png", self.shared_folder])
         png_dir = os.path.join(self.shared_folder, 'medium.png')
-        html_dir = os.path.join(self.shared_folder, 'medium.html')
 
         print("=====", png_dir)
-        # png_file_path = "/opt/cgview_comparison_tool/project/maps/medium.png"
+        png_file_path = "/opt/cgview_comparison_tool/project/maps/medium.png"
         png_dict = {'path':png_dir, 'name': 'First Image'}
         html_file_path = '/opt/cgview_comparison_tool/project/maps/medium.html'
-        # html_dict = {'path': html_dir,'name':'First Image'}
+        # html_dict = {'path': html_file_path,'name':'First Image'}
         report_client = KBaseReport(self.callback_url)
         report = report_client.create_extended_report({
             # 'html_links':[html_dict],
@@ -135,6 +130,7 @@ class CGView:
                              'output is not type dict as required.')
         # return the results
         return [output]
+
     def status(self, ctx):
         #BEGIN_STATUS
         returnVal = {'state': "OK",
