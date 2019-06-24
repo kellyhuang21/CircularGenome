@@ -75,7 +75,15 @@ class CGView:
         gbk = gfu.genome_to_genbank({'genome_ref':input_file})
         gbk_file = gbk["genbank_file"]["file_path"]
         subprocess.call(["cp", gbk_file, "/opt/cgview_comparison_tool/project/reference_genome"])
-        subprocess.call(["mv", "/opt/cgview_comparison_tool/project/reference_genome/KBase_derived_QGKT01000001.1.gb_genome.gbff", "/opt/cgview_comparison_tool/project/reference_genome/KBase_derived_QGKT01000001.1.gb_genome.gbk"])
+        base = ntpath.basename(gbk_file).rsplit(".", 1)[0]
+        print("====base", base)
+        name_gbff =  base + ".gbff"
+        name_gbk = base + ".gbk"
+        from_path = "/opt/cgview_comparison_tool/project/reference_genome/" + name_gbff
+        print("===== from", from_path)
+        to_path = "/opt/cgview_comparison_tool/project/reference_genome/" + name_gbk
+        print("===== to", to_path)
+        subprocess.call(["mv", from_path, to_path])
 
         # Add Genbank file to project_folder/reference_genome
         print("===== /opt/cgview_comparison_tool/project/reference_genome =====", os.listdir("/opt/cgview_comparison_tool/project/reference_genome"))
@@ -96,7 +104,7 @@ class CGView:
 
         print("=====", png_dir)
         png_file_path = "/opt/cgview_comparison_tool/project/maps/medium.png"
-        png_dict = {'path':png_dir, 'name': 'First Image'}
+        png_dict = {'path':png_dir, 'name': 'Circular_Genome_Map_PNG'}
         html_file_path = '/opt/cgview_comparison_tool/project/maps/medium.html'
         # html_dict = {'path': html_file_path,'name':'First Image'}
         report_client = KBaseReport(self.callback_url)
@@ -106,7 +114,7 @@ class CGView:
             'workspace_name': params['workspace_name'],
             'objects_created': [{
                 'ref':input_file,
-                'description':"Genbank file"
+                'description':"Graphical map of circular genome showing sequence composition characteristics using CGView"
             }]
 
         })
@@ -130,7 +138,6 @@ class CGView:
                              'output is not type dict as required.')
         # return the results
         return [output]
-
     def status(self, ctx):
         #BEGIN_STATUS
         returnVal = {'state': "OK",
