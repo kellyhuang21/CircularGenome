@@ -2,7 +2,8 @@
 #BEGIN_HEADER
 import os
 import ntpath
-import shutil
+from PIL import Image
+
 import subprocess
 
 from installed_clients.KBaseReportClient import KBaseReport
@@ -88,13 +89,20 @@ class CGView:
         # Generate map from Genbank file
         # subprocess.call("cgview_comparison_tool.pl -p project", shell=True)
         os.chdir("/opt/cgview_comparison_tool")
-        proc = subprocess.Popen(["cgview_comparison_tool.pl", "-p", "/opt/cgview_comparison_tool/project", "--map-size", "small"], stdout=subprocess.PIPE)
+        proc = subprocess.Popen(["cgview_comparison_tool.pl", "-p", "/opt/cgview_comparison_tool/project", "--map_size", "small"], stdout=subprocess.PIPE)
         # for line in proc.stdout:
         #     print(line)
         proc.wait()
         subprocess.call(["cgview_comparison_tool.pl",  "-p", " project"], shell=True)
+        # Resize image
+        basewidth = 300
+        img = Image.open('somepic.jpg')
+        wpercent = (basewidth/float(img.size[0]))
+        hsize = int((float(img.size[1])*float(wpercent)))
+        img = img.resize((basewidth,hsize), Image.ANTIALIAS)
+        img.save('sompic.jpg')
 
-        # Retrieve map PNG from project_folder/maps
+# Retrieve map PNG from project_folder/maps
         subprocess.call(["cp", "/opt/cgview_comparison_tool/project/maps/small.png", self.shared_folder])
         subprocess.call(["cp", "/opt/cgview_comparison_tool/project/maps/small.html", self.shared_folder])
         print("/opt/cgview_comparison_tool/project/maps/", os.listdir("/opt/cgview_comparison_tool/project/maps/"))
@@ -108,9 +116,7 @@ class CGView:
             'direct_html_link_index': 0,
             'html_links':[html_dict],
             'file_links':[png_dict],
-            'workspace_name': params['workspace_name'],
-            'html_window_height': 200,
-            'summary_window_height':200
+            'workspace_name': params['workspace_name']
         })
         # subprocess.check_output(["cd", "/opt/cgview_comparison_tool"], shell=True)
         # proj_output = subprocess.check_output(["pwd"], shell=True)
