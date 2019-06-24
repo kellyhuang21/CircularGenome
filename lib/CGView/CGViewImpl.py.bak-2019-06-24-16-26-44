@@ -26,7 +26,7 @@ class CGView:
     ######################################### noqa
     VERSION = "0.0.1"
     GIT_URL = "https://github.com/kellyhuang21/CircularGenome.git"
-    GIT_COMMIT_HASH = "24002a39f02d947880d40e20d14889b44293820c"
+    GIT_COMMIT_HASH = "a5c49b44f15f584ef4ab215c4962baa90923e901"
 
     #BEGIN_CLASS_HEADER
     #END_CLASS_HEADER
