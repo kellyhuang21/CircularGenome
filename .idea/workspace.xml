@@ -28,8 +28,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lib/CGView/CGViewImpl.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="488">
-              <caret line="97" column="106" lean-forward="true" selection-start-line="97" selection-start-column="106" selection-end-line="97" selection-end-column="106" />
+            <state relative-caret-position="821">
+              <caret line="100" column="63" lean-forward="true" selection-start-line="100" selection-start-column="63" selection-end-line="100" selection-end-column="63" />
               <folding>
                 <element signature="e#38#47#0" expanded="true" />
               </folding>
@@ -403,8 +403,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/CGView/CGViewImpl.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="488">
-          <caret line="97" column="106" lean-forward="true" selection-start-line="97" selection-start-column="106" selection-end-line="97" selection-end-column="106" />
+        <state relative-caret-position="821">
+          <caret line="100" column="63" lean-forward="true" selection-start-line="100" selection-start-column="63" selection-end-line="100" selection-end-column="63" />
           <folding>
             <element signature="e#38#47#0" expanded="true" />
           </folding>

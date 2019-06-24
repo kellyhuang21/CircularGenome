@@ -95,14 +95,14 @@ class CGView:
         subprocess.call(["cgview_comparison_tool.pl",  "-p", " project"], shell=True)
 
         # Retrieve map PNG from project_folder/maps
-        subprocess.call(["cp", "/opt/cgview_comparison_tool/project/maps/medium.png", self.shared_folder])
-        subprocess.call(["cp", "/opt/cgview_comparison_tool/project/maps/medium.html", self.shared_folder])
-
-        png_dir = os.path.join(self.shared_folder, 'medium.png')
-        html_dir = os.path.join(self.shared_folder, 'medium.html')
+        subprocess.call(["cp", "/opt/cgview_comparison_tool/project/maps/small.png", self.shared_folder])
+        subprocess.call(["cp", "/opt/cgview_comparison_tool/project/maps/small.html", self.shared_folder])
+        print("/opt/cgview_comparison_tool/project/maps/", os.listdir("/opt/cgview_comparison_tool/project/maps/"))
+        png_dir = os.path.join(self.shared_folder, 'small.png')
+        html_dir = os.path.join(self.shared_folder, 'small.html')
 
         png_dict = {'path':png_dir, 'name': 'Circular_Genome_Map_PNG'}
-        html_dict = {'path': png_dir,'name':'Circular Genome Map'}
+        html_dict = {'path': png_dir,'name':'small.html'}
         report_client = KBaseReport(self.callback_url)
         report = report_client.create_extended_report({
             'direct_html_link_index': 0,
