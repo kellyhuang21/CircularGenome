@@ -93,7 +93,6 @@ class CGView:
         #     print(line)
         proc.wait()
         subprocess.call(["cgview_comparison_tool.pl",  "-p", " project"], shell=True)
-        print("===== /opt/cgview_comparison_tool/project/maps =====", os.listdir("/opt/cgview_comparison_tool/project/maps"))
 
         # Retrieve map PNG from project_folder/maps
         subprocess.call(["cp", "/opt/cgview_comparison_tool/project/maps/medium.png", self.shared_folder])
