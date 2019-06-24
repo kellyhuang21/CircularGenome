@@ -102,9 +102,10 @@ class CGView:
         html_dir = os.path.join(self.shared_folder, 'medium.html')
 
         png_dict = {'path':png_dir, 'name': 'Circular_Genome_Map_PNG'}
-        html_dict = {'path': html_dir,'name':'Circular Genome Map'}
+        html_dict = {'path': png_dir,'name':'Circular Genome Map'}
         report_client = KBaseReport(self.callback_url)
         report = report_client.create_extended_report({
+            'direct_html_link_index': 0,
             'html_links':[html_dict],
             'file_links':[png_dict],
             'workspace_name': params['workspace_name'],
