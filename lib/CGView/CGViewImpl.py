@@ -2,6 +2,7 @@
 #BEGIN_HEADER
 import os
 import ntpath
+import shutil
 import subprocess
 
 from installed_clients.KBaseReportClient import KBaseReport
@@ -93,14 +94,16 @@ class CGView:
         print("===== /opt/cgview_comparison_tool/project/maps =====", os.listdir("/opt/cgview_comparison_tool/project/maps"))
 
         # Retrieve map PNG from project_folder/maps
-        subprocess.call(["cp", "/opt/cgview_comparison_tool/project/maps/medium.png", self.shared_folder])
+        shutil.move("/opt/cgview_comparison_tool/project/maps/medium.png", self.shared_folder)
+        # subprocess.call(["cp", "/opt/cgview_comparison_tool/project/maps/medium.png", self.shared_folder])
         png_dir = os.path.join(self.shared_folder, 'medium.png')
+        html_dir = os.path.join(self.shared_folder, 'medium.html')
 
         print("=====", png_dir)
-        png_file_path = "/opt/cgview_comparison_tool/project/maps/medium.png"
+        # png_file_path = "/opt/cgview_comparison_tool/project/maps/medium.png"
         png_dict = {'path':png_dir, 'name': 'First Image'}
         html_file_path = '/opt/cgview_comparison_tool/project/maps/medium.html'
-        # html_dict = {'path': html_file_path,'name':'First Image'}
+        # html_dict = {'path': html_dir,'name':'First Image'}
         report_client = KBaseReport(self.callback_url)
         report = report_client.create_extended_report({
             # 'html_links':[html_dict],
