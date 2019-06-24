@@ -12,7 +12,8 @@ CMD ["brew install imagemagick"]
 CMD ["brew install wget"]
 
 RUN cd /opt && \
-    pip install Pillow && \
+    pip install --upgrade pip && \
+    pip install --no-cache-dir pillow && \
     apt-get update -qq && \
     apt-get install -yq --no-install-recommends \
                                                 git \
