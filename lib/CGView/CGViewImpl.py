@@ -93,30 +93,16 @@ class CGView:
         #     print(line)
         proc.wait()
         subprocess.call(["cgview_comparison_tool.pl",  "-p", " project"], shell=True)
-        # Resize image
-        basewidth = 300
-        img = Image.open('/opt/cgview_comparison_tool/project/maps/medium.png')
-        wpercent = (basewidth/float(img.size[0]))
-        hsize = int((float(img.size[1])*float(wpercent)))
-        img = img.resize((basewidth,hsize), Image.ANTIALIAS)
-        img.save('/opt/cgview_comparison_tool/project/maps/medium.png')
 
         # Retrieve map PNG from project_folder/maps
         subprocess.call(["cp", "/opt/cgview_comparison_tool/project/maps/medium.png", self.shared_folder])
-        # subprocess.call(["cp", "/opt/cgview_comparison_tool/project/maps/medium.html", self.shared_folder])
-        print("/opt/cgview_comparison_tool/project/maps/", os.listdir("/opt/cgview_comparison_tool/project/maps/"))
+        subprocess.call(["cp", "/opt/cgview_comparison_tool/project/maps/medium.html", self.shared_folder])
+
         png_dir = os.path.join(self.shared_folder, 'medium.png')
-        # html_file = os.path.join(self.shared_folder, 'medium_output.html')
-        # with open(html_file, 'w') as html_handle:
-        #     html_handle.write(f'<img src="{self.shared_folder + "/" + "medium.png"}" width="50%" height="50%"></img>')
-        # html_handle.close()
-        # print("===== /kb/module/work/tmp/", os.listdir("/kb/module/work/tmp/"))
-        # f = open(html_file, 'r')
-        # print("++++++++", f.read())
-        # f.close()
-        print("=====html_file", os.listdir(self.shared_folder))
+        html_dir = os.path.join(self.shared_folder, 'medium.html')
+
         png_dict = {'path':png_dir, 'name': 'Circular_Genome_Map_PNG'}
-        html_dict = {'path': png_dir, 'name': 'medium.html'}
+        html_dict = {'path': png_dir,'name':'Circular Genome Map'}
         report_client = KBaseReport(self.callback_url)
         report = report_client.create_extended_report({
             'direct_html_link_index': 0,
@@ -124,7 +110,6 @@ class CGView:
             'file_links':[png_dict],
             'workspace_name': params['workspace_name'],
         })
-
         # subprocess.check_output(["cd", "/opt/cgview_comparison_tool"], shell=True)
         # proj_output = subprocess.check_output(["pwd"], shell=True)
         # print("=====cd /opt/cgview_comparison_tool=====", proj_output)
