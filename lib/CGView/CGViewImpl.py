@@ -104,15 +104,15 @@ class CGView:
         wpercent = (basewidth/float(img.size[0]))
         hsize = int((float(img.size[1])*float(wpercent)))
         # img = img.resize((basewidth,hsize), Image.ANTIALIAS)
-        img = img.resize((300, 300))
-        img.save('/opt/cgview_comparison_tool/project/maps/medium.png', "PNG", optimize=True)
+        img = img.resize((30, 30), Image.ANTIALIAS)
+        img.save('/opt/cgview_comparison_tool/project/maps/medium1.png', "PNG", optimize=True)
         print("=====", os.listdir("/opt/cgview_comparison_tool/project/maps/"))
 
         png_dir = os.path.join(self.shared_folder, 'medium.png')
         html_dir = os.path.join(self.shared_folder, 'medium.html')
 
-        png_dict = {'path':png_dir, 'name': 'Circular_Genome_Map_PNG'}
-        html_dict = {'path': png_dir,'name':'Circular Genome Map'}
+        png_dict = {'path':'/opt/cgview_comparison_tool/project/maps/medium1.png', 'name': 'Circular_Genome_Map_PNG'}
+        html_dict = {'path': '/opt/cgview_comparison_tool/project/maps/medium1.png','name':'Circular Genome Map'}
         report_client = KBaseReport(self.callback_url)
         report = report_client.create_extended_report({
             'direct_html_link_index': 0,
