@@ -104,7 +104,7 @@ class CGView:
         wpercent = (basewidth/float(img.size[0]))
         hsize = int((float(img.size[1])*float(wpercent)))
         # img = img.resize((basewidth,hsize), Image.ANTIALIAS)
-        img = img.resize((30, 30), Image.ANTIALIAS)
+        img = img.resize((600, 600), Image.ANTIALIAS)
         img.save('/opt/cgview_comparison_tool/project/maps/medium1.png', "PNG", optimize=True)
         # print("=====", os.listdir("/opt/cgview_comparison_tool/project/maps/"))
         subprocess.call(["cp", "/opt/cgview_comparison_tool/project/maps/medium1.png", self.shared_folder])
