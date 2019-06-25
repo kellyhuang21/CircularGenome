@@ -108,8 +108,8 @@ class CGView:
         png_dir = os.path.join(self.shared_folder, 'medium.png')
         html_file = os.path.join(self.shared_folder, 'medium.html')
         with open(html_file, 'w') as html_handle:
-            html_handle.write('<img src="/opt/cgview_comparison_tool/project/maps/medium.png" height="50%"></img>')
-
+            html_handle.write('<img src="/opt/cgview_comparison_tool/project/maps/medium.png" width="50% height="50%"></img>')
+        html_handle.close()
         png_dict = {'path':png_dir, 'name': 'Circular_Genome_Map_PNG'}
         html_dict = {'path': html_file,'name':'medium.html'}
         report_client = KBaseReport(self.callback_url)
