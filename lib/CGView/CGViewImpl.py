@@ -2,7 +2,7 @@
 #BEGIN_HEADER
 import os
 import ntpath
-
+from PIL import Image
 import subprocess
 
 from installed_clients.KBaseReportClient import KBaseReport
@@ -103,7 +103,7 @@ class CGView:
 
         # Retrieve map PNG from project_folder/maps
         subprocess.call(["cp", "/opt/cgview_comparison_tool/project/maps/medium.png", self.shared_folder])
-        # subprocess.call(["cp", "/opt/cgview_comparison_tool/project/maps/medium.html", self.shared_folder])
+        subprocess.call(["cp", "/opt/cgview_comparison_tool/project/maps/medium.html", self.shared_folder])
         print("/opt/cgview_comparison_tool/project/maps/", os.listdir("/opt/cgview_comparison_tool/project/maps/"))
         png_dir = os.path.join(self.shared_folder, 'medium.png')
         html_file = os.path.join(self.shared_folder, 'medium_output.html')
@@ -116,7 +116,7 @@ class CGView:
         # f.close()
         print("=====html_file", os.listdir(self.shared_folder))
         png_dict = {'path':png_dir, 'name': 'Circular_Genome_Map_PNG'}
-        html_dict = {'path': "/kb/module/work/tmp/medium_output.html",'name':'medium_output.html'}
+        html_dict = {'path': "/kb/module/work/tmp/medium.html",'name':'medium.html'}
         report_client = KBaseReport(self.callback_url)
         report = report_client.create_extended_report({
             'direct_html_link_index': 0,
