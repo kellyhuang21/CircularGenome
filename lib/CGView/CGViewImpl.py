@@ -103,20 +103,20 @@ class CGView:
 
         # Retrieve map PNG from project_folder/maps
         subprocess.call(["cp", "/opt/cgview_comparison_tool/project/maps/medium.png", self.shared_folder])
-        subprocess.call(["cp", "/opt/cgview_comparison_tool/project/maps/medium.html", self.shared_folder])
+        # subprocess.call(["cp", "/opt/cgview_comparison_tool/project/maps/medium.html", self.shared_folder])
         print("/opt/cgview_comparison_tool/project/maps/", os.listdir("/opt/cgview_comparison_tool/project/maps/"))
         png_dir = os.path.join(self.shared_folder, 'medium.png')
-        html_file = os.path.join(self.shared_folder, 'medium_output.html')
-        with open(html_file, 'w') as html_handle:
-            html_handle.write(f'<img src="{self.shared_folder + "/" + "medium.png"}" width="50%" height="50%"></img>')
-        html_handle.close()
-        print("===== /kb/module/work/tmp/", os.listdir("/kb/module/work/tmp/"))
+        # html_file = os.path.join(self.shared_folder, 'medium_output.html')
+        # with open(html_file, 'w') as html_handle:
+        #     html_handle.write(f'<img src="{self.shared_folder + "/" + "medium.png"}" width="50%" height="50%"></img>')
+        # html_handle.close()
+        # print("===== /kb/module/work/tmp/", os.listdir("/kb/module/work/tmp/"))
         # f = open(html_file, 'r')
         # print("++++++++", f.read())
         # f.close()
         print("=====html_file", os.listdir(self.shared_folder))
         png_dict = {'path':png_dir, 'name': 'Circular_Genome_Map_PNG'}
-        html_dict = {'path': "/kb/module/work/tmp/medium.html",'name':'medium.html'}
+        html_dict = {'path': png_dir, 'name': 'medium.html'}
         report_client = KBaseReport(self.callback_url)
         report = report_client.create_extended_report({
             'direct_html_link_index': 0,
