@@ -106,12 +106,16 @@ class CGView:
         subprocess.call(["cp", "/opt/cgview_comparison_tool/project/maps/medium.html", self.shared_folder])
         print("/opt/cgview_comparison_tool/project/maps/", os.listdir("/opt/cgview_comparison_tool/project/maps/"))
         png_dir = os.path.join(self.shared_folder, 'medium.png')
-        html_file = os.path.join(self.shared_folder, 'medium.html')
+        html_file = os.path.join(self.shared_folder, 'medium1.html')
         with open(html_file, 'w') as html_handle:
-            html_handle.write('<img src=png_dir width="50% height="50%"></img>')
+            html_handle.write('<img src=self.shared_folder/medium.png width="50% height="50%"></img>')
         html_handle.close()
+        # f = open(html_file, 'r')
+        # print("++++++++", f.read())
+        # f.close()
+        print("=====html_file", os.listdir(self.shared_folder))
         png_dict = {'path':png_dir, 'name': 'Circular_Genome_Map_PNG'}
-        html_dict = {'path': html_file,'name':'medium.html'}
+        html_dict = {'path': html_file,'name':'medium1.html'}
         report_client = KBaseReport(self.callback_url)
         report = report_client.create_extended_report({
             'direct_html_link_index': 0,
