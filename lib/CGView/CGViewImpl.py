@@ -106,13 +106,13 @@ class CGView:
         # img = img.resize((basewidth,hsize), Image.ANTIALIAS)
         img = img.resize((30, 30), Image.ANTIALIAS)
         img.save('/opt/cgview_comparison_tool/project/maps/medium1.png', "PNG", optimize=True)
-        print("=====", os.listdir("/opt/cgview_comparison_tool/project/maps/"))
+        # print("=====", os.listdir("/opt/cgview_comparison_tool/project/maps/"))
+        subprocess.call(["cp", "/opt/cgview_comparison_tool/project/maps/medium1.png", self.shared_folder])
 
-        png_dir = os.path.join(self.shared_folder, 'medium.png')
+        png_dir = os.path.join(self.shared_folder, 'medium1.png')
         html_dir = os.path.join(self.shared_folder, 'medium.html')
-
-        png_dict = {'path':'/opt/cgview_comparison_tool/project/maps/medium1.png', 'name': 'Circular_Genome_Map_PNG'}
-        html_dict = {'path': '/opt/cgview_comparison_tool/project/maps/medium1.png','name':'medium1.png'}
+        png_dict = {'path':png_dir, 'name': 'Circular_Genome_Map_PNG'}
+        html_dict = {'path': png_dir,'name':'Circular Genome Map'}
         report_client = KBaseReport(self.callback_url)
         report = report_client.create_extended_report({
             'direct_html_link_index': 0,
