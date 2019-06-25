@@ -94,12 +94,12 @@ class CGView:
         proc.wait()
         subprocess.call(["cgview_comparison_tool.pl",  "-p", " project"], shell=True)
         # Resize image
-        # basewidth = 300
-        # img = Image.open('/opt/cgview_comparison_tool/project/maps/medium.png')
-        # wpercent = (basewidth/float(img.size[0]))
-        # hsize = int((float(img.size[1])*float(wpercent)))
-        # img = img.resize((basewidth,hsize), Image.ANTIALIAS)
-        # img.save('/opt/cgview_comparison_tool/project/maps/medium.png')
+        basewidth = 300
+        img = Image.open('/opt/cgview_comparison_tool/project/maps/medium.png')
+        wpercent = (basewidth/float(img.size[0]))
+        hsize = int((float(img.size[1])*float(wpercent)))
+        img = img.resize((basewidth,hsize), Image.ANTIALIAS)
+        img.save('/opt/cgview_comparison_tool/project/maps/medium.png')
 
         # Retrieve map PNG from project_folder/maps
         subprocess.call(["cp", "/opt/cgview_comparison_tool/project/maps/medium.png", self.shared_folder])

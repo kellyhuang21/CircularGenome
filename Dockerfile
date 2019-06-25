@@ -8,12 +8,10 @@ MAINTAINER Kelly Huang <kellyhuang@berkeley.edu>
 
 # RUN apt-get update
 
-CMD ["brew install imagemagick"]
-CMD ["brew install wget"]
 
 RUN cd /opt && \
     pip install --upgrade pip && \
-    pip install --no-cache-dir pillow && \
+    pip install Pillow && \
     apt-get update -qq && \
     apt-get install -yq --no-install-recommends \
                                                 git \
