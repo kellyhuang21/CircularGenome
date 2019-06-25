@@ -95,29 +95,36 @@ class CGView:
         subprocess.call(["cgview_comparison_tool.pl",  "-p", " project"], shell=True)
 
         # Retrieve map PNG from project_folder/maps
-        subprocess.call(["cp", "/opt/cgview_comparison_tool/project/maps/medium.png", self.shared_folder])
-        subprocess.call(["cp", "/opt/cgview_comparison_tool/project/maps/medium.html", self.shared_folder])
+        output_dir= os.path.join(self.shared_folder, 'output_folder')
+        if not os.path.exists(output_dir):
+            os.makedirs(output_dir)
+
+        subprocess.call(["cp", "/opt/cgview_comparison_tool/project/maps/medium.png", output_dir])
+        subprocess.call(["cp", "/opt/cgview_comparison_tool/project/maps/medium.html", output_dir])
 
         # Resize image
-        basewidth = 300
-        img = Image.open('/opt/cgview_comparison_tool/project/maps/medium.png')
-        wpercent = (basewidth/float(img.size[0]))
-        hsize = int((float(img.size[1])*float(wpercent)))
-        # img = img.resize((basewidth,hsize), Image.ANTIALIAS)
-        img = img.resize((600, 600), Image.ANTIALIAS)
-        img.save('/opt/cgview_comparison_tool/project/maps/medium1.png', "PNG", optimize=True)
-        # print("=====", os.listdir("/opt/cgview_comparison_tool/project/maps/"))
-        subprocess.call(["cp", "/opt/cgview_comparison_tool/project/maps/medium1.png", self.shared_folder])
-
-        png_dir = os.path.join(self.shared_folder, 'medium1.png')
-        html_dir = os.path.join(self.shared_folder, 'medium.html')
-        png_dict = {'path':png_dir, 'name': 'Circular_Genome_Map_PNG'}
-        html_dict = {'path': png_dir,'name':'Circular Genome Map'}
+        # basewidth = 300
+        # img = Image.open('/opt/cgview_comparison_tool/project/maps/medium.png')
+        # wpercent = (basewidth/float(img.size[0]))
+        # hsize = int((float(img.size[1])*float(wpercent)))
+        # # img = img.resize((basewidth,hsize), Image.ANTIALIAS)
+        # img = img.resize((600, 600), Image.ANTIALIAS)
+        # img.save('/opt/cgview_comparison_tool/project/maps/medium1.png', "PNG", optimize=True)
+        # # print("=====", os.listdir("/opt/cgview_comparison_tool/project/maps/"))
+        # subprocess.call(["cp", "/opt/cgview_comparison_tool/project/maps/medium1.png", self.shared_folder])
+        # png_dir = os.path.join(self.shared_folder, 'medium1.png')
+        html_file = os.path.join(output_dir, 'index.html')
+        with open(html_file, 'w') as html_handle:
+            html_handle.write(f'<img src="{output_dir + "/" + "medium.png"}" width="100%" height="100%"></img>')
+        html_handle.close()
+        print("=======output_folder", os.listdir(output_dir))
+        # png_dict = {'path':png_dir, 'name': 'Circular_Genome_Map_PNG'}
+        html_dict = {'path': output_dir,'name':'index.html'}
         report_client = KBaseReport(self.callback_url)
         report = report_client.create_extended_report({
             'direct_html_link_index': 0,
             'html_links':[html_dict],
-            'file_links':[png_dict],
+            # 'file_links':[png_dict],
             'workspace_name': params['workspace_name'],
         })
         # subprocess.check_output(["cd", "/opt/cgview_comparison_tool"], shell=True)
