@@ -112,7 +112,7 @@ class CGView:
         html_dir = os.path.join(self.shared_folder, 'medium.html')
 
         png_dict = {'path':'/opt/cgview_comparison_tool/project/maps/medium1.png', 'name': 'Circular_Genome_Map_PNG'}
-        html_dict = {'path': '/opt/cgview_comparison_tool/project/maps/medium1.png','name':'Circular Genome Map'}
+        html_dict = {'path': '/opt/cgview_comparison_tool/project/maps/medium1.png','name':'medium1.png'}
         report_client = KBaseReport(self.callback_url)
         report = report_client.create_extended_report({
             'direct_html_link_index': 0,
