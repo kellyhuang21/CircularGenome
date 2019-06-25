@@ -110,12 +110,13 @@ class CGView:
         with open(html_file, 'w') as html_handle:
             html_handle.write(f'<img src="{self.shared_folder + "/" + "medium.png"}" width="50%" height="50%"></img>')
         html_handle.close()
+        print("===== /kb/module/work/tmp/", os.listdir("/kb/module/work/tmp/"))
         # f = open(html_file, 'r')
         # print("++++++++", f.read())
         # f.close()
         print("=====html_file", os.listdir(self.shared_folder))
         png_dict = {'path':png_dir, 'name': 'Circular_Genome_Map_PNG'}
-        html_dict = {'path': html_file,'name':'medium_output.html'}
+        html_dict = {'path': "/kb/module/work/tmp/medium_output.html",'name':'medium_output.html'}
         report_client = KBaseReport(self.callback_url)
         report = report_client.create_extended_report({
             'direct_html_link_index': 0,
