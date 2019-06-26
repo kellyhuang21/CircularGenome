@@ -121,7 +121,8 @@ class CGView:
             'html_links':[html_dict],
             'file_links':[png_dict],
             'workspace_name': params['workspace_name'],
-            'summary_window_height': 1000
+            'summary_window_height': 1000,
+            'html_window_height':1000
         })
         # subprocess.check_output(["cd", "/opt/cgview_comparison_tool"], shell=True)
         # proj_output = subprocess.check_output(["pwd"], shell=True)
