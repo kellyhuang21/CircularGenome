@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="96a14682-e708-489b-a7c1-f3f01e5a855c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dependencies.json" beforeDir="false" afterPath="$PROJECT_DIR$/dependencies.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/CGView/CGViewImpl.py" beforeDir="false" afterPath="$PROJECT_DIR$/lib/CGView/CGViewImpl.py" afterDir="false" />
-    </list>
+    <list default="true" id="96a14682-e708-489b-a7c1-f3f01e5a855c" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,8 +26,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lib/CGView/CGViewImpl.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="343">
-              <caret line="137" column="24" lean-forward="true" selection-start-line="137" selection-start-column="24" selection-end-line="137" selection-end-column="24" />
+            <state relative-caret-position="346">
+              <caret line="122" column="49" lean-forward="true" selection-start-line="122" selection-start-column="49" selection-end-line="122" selection-end-column="49" />
               <folding>
                 <element signature="e#38#47#0" expanded="true" />
               </folding>
@@ -127,10 +123,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-38" />
-    <option name="y" value="118" />
-    <option name="width" value="1556" />
-    <option name="height" value="1322" />
+    <option name="x" value="530" />
+    <option name="y" value="121" />
+    <option name="width" value="1100" />
+    <option name="height" value="947" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -255,10 +251,10 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-38" y="118" width="1556" height="1322" extended-state="0" />
+    <frame x="530" y="121" width="1100" height="947" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18031704" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25803402" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -405,8 +401,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/CGView/CGViewImpl.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="343">
-          <caret line="137" column="24" lean-forward="true" selection-start-line="137" selection-start-column="24" selection-end-line="137" selection-end-column="24" />
+        <state relative-caret-position="346">
+          <caret line="122" column="49" lean-forward="true" selection-start-line="122" selection-start-column="49" selection-end-line="122" selection-end-column="49" />
           <folding>
             <element signature="e#38#47#0" expanded="true" />
           </folding>
