@@ -28,8 +28,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lib/CGView/CGViewImpl.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="453">
-              <caret line="124" column="37" selection-start-line="124" selection-start-column="37" selection-end-line="124" selection-end-column="37" />
+            <state relative-caret-position="431">
+              <caret line="129" column="54" lean-forward="true" selection-start-line="127" selection-start-column="1" selection-end-line="129" selection-end-column="54" />
               <folding>
                 <element signature="e#38#47#0" expanded="true" />
               </folding>
@@ -125,8 +125,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="530" />
-    <option name="y" value="121" />
+    <option name="x" value="-165" />
+    <option name="y" value="57" />
     <option name="width" value="1100" />
     <option name="height" value="947" />
   </component>
@@ -253,7 +253,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="530" y="121" width="1100" height="947" extended-state="0" />
+    <frame x="-165" y="57" width="1100" height="947" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25803402" />
@@ -403,8 +403,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/CGView/CGViewImpl.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="453">
-          <caret line="124" column="37" selection-start-line="124" selection-start-column="37" selection-end-line="124" selection-end-column="37" />
+        <state relative-caret-position="431">
+          <caret line="129" column="54" lean-forward="true" selection-start-line="127" selection-start-column="1" selection-end-line="129" selection-end-column="54" />
           <folding>
             <element signature="e#38#47#0" expanded="true" />
           </folding>
