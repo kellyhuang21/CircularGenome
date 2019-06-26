@@ -96,92 +96,45 @@ class CGView:
         subprocess.call(["cgview_comparison_tool.pl",  "-p", " project"], shell=True)
 
         # Retrieve map PNG from project_folder/maps
-        output_dir= os.path.join(self.shared_folder, 'output_folder')
-        if not os.path.exists(output_dir):
-            os.makedirs(output_dir)
+        subprocess.call(["cp", "/opt/cgview_comparison_tool/project/maps/medium.png", self.shared_folder])
+        subprocess.call(["cp", "/opt/cgview_comparison_tool/project/maps/medium.html", self.shared_folder])
 
-        subprocess.call(["cp", "/opt/cgview_comparison_tool/project/maps/medium.png", output_dir])
-        # subprocess.call(["cp", "/opt/cgview_comparison_tool/project/maps/medium.html", output_dir])
+        # Resize image
+        basewidth = 900
+        img = Image.open('/opt/cgview_comparison_tool/project/maps/medium.png')
+        wpercent = (basewidth/float(img.size[0]))
+        hsize = int((float(img.size[1])*float(wpercent)))
+        img = img.resize((basewidth,hsize), Image.ANTIALIAS)
+        # img = img.resize((600, 600), Image.ANTIALIAS)
+        img.save('/opt/cgview_comparison_tool/project/maps/medium1.png', quality=95)
+        # print("=====", os.listdir("/opt/cgview_comparison_tool/project/maps/"))
+        subprocess.call(["cp", "/opt/cgview_comparison_tool/project/maps/medium1.png", self.shared_folder])
 
-        output_png_file_path = os.path.join(output_dir, 'medium.png')
-        html_file = os.path.join(output_dir, 'index.html')
-        with open(html_file, 'w') as html_handle:
-            html_handle.write(f'<img src="{output_dir + "/" + "medium.png"}" width="100%" height="100%"></img>')
-        html_handle.close()
-
-        dfu = DFUClient(self.callback_url)
-        try:
-            png_upload_ret = dfu.file_to_shock({'file_path': output_png_file_path, 'make_handle': 0})
-        except:
-            raise ValueError('Logging exception loading png_file to shock')
-        try:
-            upload_ret = dfu.file_to_shock({'file_path': output_dir,
-                                            'make_handle': 0,
-                                            'pack': 'zip'})
-        except:
-            raise ValueError('Logging exception loading html_report to shock')
-        reportObj = {'direct_html_link_index': 0,
-                     # 'file_links': [],
-                     'html_links': [],
-                     'workspace_name': params['workspace_name']
-                     }
-        # reportObj['file_links'] = [{'shock_id': png_upload_ret['shock_id'],
-        #                             'name': 'medium.png',
-        #                             'label': 'PNG'}]
-        reportObj['html_links'] = [{'path':output_dir,
-                                    # 'shock_id': upload_ret['shock_id'],
-                                    'name': 'index.html',
-                                    'label': 'html report'}
-                                   ]
-        reportClient = KBaseReport(self.callback_url, token=ctx['token'])
-        report_info = reportClient.create_extended_report(reportObj)
-
-        # # Resize image
-        # basewidth = 300
-        # img = Image.open('/opt/cgview_comparison_tool/project/maps/medium.png')
-        # wpercent = (basewidth/float(img.size[0]))
-        # hsize = int((float(img.size[1])*float(wpercent)))
-        # img = img.resize((basewidth,hsize), Image.ANTIALIAS)
-        # # img = img.resize((600, 600), Image.ANTIALIAS)
-        # img.save('/opt/cgview_comparison_tool/project/maps/medium1.png', "PNG", optimize=True)
-        # # # print("=====", os.listdir("/opt/cgview_comparison_tool/project/maps/"))
-        # # subprocess.call(["cp", "/opt/cgview_comparison_tool/project/maps/medium1.png", self.shared_folder])
-        # png_dir = os.path.join(self.shared_folder, 'medium1.png')
-        # html_file = os.path.join(output_dir, 'index.html')
-        # with open(html_file, 'w') as html_handle:
-        #     html_handle.write(f'<img src="{output_dir + "/" + "medium.png"}" width="100%" height="100%"></img>')
-        # html_handle.close()
-        # print("=======output_folder", os.listdir(output_dir))
+        png_dir = os.path.join(self.shared_folder, 'medium1.png')
+        png_dir_higher = os.path.join(self.shared_folder, 'medium.png')
+        html_dir = os.path.join(self.shared_folder, 'medium.html')
+        png_dict = {'path':png_dir_higher, 'name': 'Circular_Genome_Map_PNG'}
+        html_dict = {'path': png_dir,'name':'Circular Genome Map'}
+        report_client = KBaseReport(self.callback_url)
+        report = report_client.create_extended_report({
+            'direct_html_link_index': 0,
+            'html_links':[html_dict],
+            'file_links':[png_dict],
+            'workspace_name': params['workspace_name'],
+            'summary_window_height': 900,
+            'html_window_height': 900
+        })
+        # subprocess.check_output(["cd", "/opt/cgview_comparison_tool"], shell=True)
+        # proj_output = subprocess.check_output(["pwd"], shell=True)
+        # print("=====cd /opt/cgview_comparison_tool=====", proj_output)
         #
-        # report_client = KBaseReport(self.callback_url)
-        # dfu = DFUClient(self.callback_url)
-        # try:
-        # #upload_ret = dfu.file_to_shock({'file_path': html_file,
-        #     upload_ret = dfu.file_to_shock({'file_path': output_dir,
-        #                                     'make_handle': 0,
-        #                                     'pack': 'zip'})
-        # except:
-        #     raise ValueError('Logging exception loading html_report to shock')
-        # try:
-        #     png_upload_ret = dfu.file_to_shock({'file_path': os.path.join(output_dir, "medium.png"),
-        #                                     'make_handle': 0})
-        #     #'pack': 'zip'})
-        # except:
-        #     raise ValueError('Logging exception loading png_file to shock')
-        #
-        #
-        # png_dict = {'shock_id': png_upload_ret['shock_id'], 'path':png_dir, 'name': 'Circular_Genome_Map_PNG'}
-        # html_dict = {'shock_id': upload_ret['shock_id'], 'path': output_dir,'name':'index.html'}
-        # report = report_client.create_extended_report({
-        #     'direct_html_link_index': 0,
-        #     'html_links':[html_dict],
-        #     'file_links':[png_dict],
-        #     'workspace_name': params['workspace_name'],
-        # })
-
+        # report = KBaseReport(self.callback_url)
+        # report_info = report.create({'report': {'objects_created':[],
+        #                                         'text_message': params['input_file']},
+        #                                         'workspace_name': params['workspace_name']})
         output = {
-            'report_name': report_info['name'],
-            'report_ref': report_info['ref'],
+            'report_name': report['name'],
+            'report_ref': report['ref'],
         }
         #END run_CGView
 
