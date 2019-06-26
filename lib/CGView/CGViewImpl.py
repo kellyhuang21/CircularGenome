@@ -100,7 +100,7 @@ class CGView:
         subprocess.call(["cp", "/opt/cgview_comparison_tool/project/maps/medium.html", self.shared_folder])
 
         # Resize image
-        basewidth = 300
+        basewidth = 1000
         img = Image.open('/opt/cgview_comparison_tool/project/maps/medium.png')
         wpercent = (basewidth/float(img.size[0]))
         hsize = int((float(img.size[1])*float(wpercent)))
