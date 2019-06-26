@@ -111,8 +111,9 @@ class CGView:
         subprocess.call(["cp", "/opt/cgview_comparison_tool/project/maps/medium1.png", self.shared_folder])
 
         png_dir = os.path.join(self.shared_folder, 'medium1.png')
+        png_dir_higher = os.path.join(self.shared_folder, 'medium.png')
         html_dir = os.path.join(self.shared_folder, 'medium.html')
-        png_dict = {'path':png_dir, 'name': 'Circular_Genome_Map_PNG'}
+        png_dict = {'path':png_dir_higher, 'name': 'Circular_Genome_Map_PNG'}
         html_dict = {'path': png_dir,'name':'Circular Genome Map'}
         report_client = KBaseReport(self.callback_url)
         report = report_client.create_extended_report({
@@ -120,6 +121,7 @@ class CGView:
             'html_links':[html_dict],
             'file_links':[png_dict],
             'workspace_name': params['workspace_name'],
+            'summary_window_height': 1000
         })
         # subprocess.check_output(["cd", "/opt/cgview_comparison_tool"], shell=True)
         # proj_output = subprocess.check_output(["pwd"], shell=True)
