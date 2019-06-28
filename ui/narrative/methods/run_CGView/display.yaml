@@ -1,7 +1,7 @@
 #
 # define display information
 #
-name: Circular Genome Visualization Tool
+name: Circular Genome Visualization Tool (dead)
 
 tooltip: |
     Generate a map and annotations of circular genomes using CGView.

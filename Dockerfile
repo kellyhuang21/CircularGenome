@@ -35,8 +35,7 @@ RUN cd /opt && \
     curl -O -J -L http://www.ualberta.ca/~stothard/downloads/cgview_comparison_tool.zip > cgview_comparison_tool.zip && \
     unzip cgview_comparison_tool.zip && \
     rm cgview_comparison_tool.zip
-    # && \
-    # export PERL5LIB="${CCT_HOME}"/lib/bioperl-1.2.3:"${CCT_HOME}"/lib/perl_modules:"$PERL5LIB"
+
 
 ENV CCT_HOME="/opt/cgview_comparison_tool"
 ENV PATH="$PATH":"${CCT_HOME}/scripts":/opt/blast-2.2.26/bin
